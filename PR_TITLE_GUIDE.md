@@ -65,7 +65,7 @@ perf(python)!: Optimize groupby operations with breaking API changes
 
 ```
 fix(python): Fix DataFrame.top_k not handling nulls correctly.     ❌ Ends with period
-feat(rust): Add parquet file write pipeline for new IO sinks (#25618)  ❌ Includes PR number
+feat(rust): Add parquet file write pipeline for new IO sinks (#25618) ❌ Includes PR number
 refactor: simplify expression evaluation logic  ❌ Description doesn't start with uppercase
 docs: updated installation guide  ❌ Uses past tense
 Fix bug  ❌ Missing scope and proper description
@@ -77,7 +77,7 @@ PR titles are automatically validated using the configuration in `.github/pr-tit
 
 The validation regex is:
 ```
-^(build|chore|ci|depr|docs|feat|fix|perf|refactor|release|test)(\((python|rust)\!?(,(python|rust)\!?)?\))?\!?\: [A-Z].*[^\.\!\?,… ]$
+^(build|chore|ci|depr|docs|feat|fix|perf|refactor|release|test)(\\((python|rust)\\!?(,(python|rust)\\!?)?\\))?\\!?\\: [A-Z].*[^\\.\\!\\?,… ]$
 ```
 
 ## References
