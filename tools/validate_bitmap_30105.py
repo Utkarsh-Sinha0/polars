@@ -1,4 +1,5 @@
 import os
+import shutil
 from pathlib import Path
 import subprocess
 import sys
@@ -22,6 +23,7 @@ def run_rust():
         '#[path = "../../crates/polars/tests/it/arrow/bitmap/mod.rs"]\nmod bitmap;\n',
         encoding="utf-8",
     )
+    shutil.copyfile(ROOT / "Cargo.lock", harness / "Cargo.lock")
     command = ["cargo", "test", "--manifest-path", str(harness / "Cargo.toml"),
                "--test", "bitmap"]
     patched = SOURCE.read_bytes()
