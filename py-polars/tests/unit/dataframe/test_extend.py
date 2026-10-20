@@ -115,3 +115,20 @@ def test_extend_nested_mismatch() -> None:
 
     with pytest.raises(pl.exceptions.InvalidOperationError):
         s.extend_constant([True], 2)
+
+
+@pytest.mark.parametrize("offset", [1, 8, 61, 64])
+def test_extend_boolean_filtered_slice_30105(offset: int) -> None:
+    df = pl.DataFrame(
+        {
+            "b": [True] * offset + [False, None, True],
+            "keep": [False] * offset + [True] * 3,
+        }
+    )
+    result = df.filter(pl.col("keep"))
+    del df
+
+    result.extend(pl.DataFrame({"b": [False], "keep": [True]}))
+
+    expected = pl.DataFrame({"b": [False, None, True, False], "keep": [True] * 4})
+    assert_frame_equal(result, expected)

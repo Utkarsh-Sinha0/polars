@@ -2,6 +2,49 @@ use polars_arrow::array::Splitable;
 use polars_arrow::bitmap::Bitmap;
 
 #[test]
+fn into_mut_sliced() {
+    for offset in [1, 7, 8, 63, 64] {
+        let mut values = vec![true; offset];
+        values.extend([false, true, false]);
+        let bitmap = Bitmap::from(values).sliced(offset, 3);
+
+        let bitmap = bitmap.into_mut().left().unwrap();
+        assert_eq!(bitmap.iter().collect::<Vec<_>>(), [false, true, false]);
+        assert_eq!(bitmap.unset_bits(), 2);
+    }
+}
+
+#[test]
+fn into_mut_zero_offset_reuses_storage() {
+    let bitmap = Bitmap::from([false, true, false]);
+    let ptr = bitmap.as_slice().0.as_ptr();
+
+    let mutable = bitmap.into_mut().right().unwrap();
+    assert_eq!(mutable.as_slice().as_ptr(), ptr);
+    assert_eq!(mutable.iter().collect::<Vec<_>>(), [false, true, false]);
+}
+
+#[test]
+fn make_mut_sliced() {
+    for offset in [0, 1, 7, 8, 63, 64] {
+        for length in [0, 1, 3, 65] {
+            let expected: Vec<_> = (0..length).map(|i| i % 3 == 1).collect();
+            let mut values = vec![true; offset];
+            values.extend(&expected);
+            let bitmap = Bitmap::from(values).sliced(offset, length);
+
+            let mut mutable = bitmap.make_mut();
+            assert_eq!(mutable.iter().collect::<Vec<_>>(), expected);
+            mutable.push(true);
+            assert_eq!(
+                mutable.iter().collect::<Vec<_>>(),
+                expected.into_iter().chain([true]).collect::<Vec<_>>()
+            );
+        }
+    }
+}
+
+#[test]
 fn as_slice() {
     let b = Bitmap::from([true, true, true, true, true, true, true, true, true]);
 

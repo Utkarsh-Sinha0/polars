@@ -60,3 +60,25 @@ def test_extend_sliced_12968() -> None:
         "a",
         "c",
     ]
+
+
+@pytest.mark.parametrize("offset", [0, 1, 8, 61, 64])
+@pytest.mark.parametrize("values", [[False, True, False], [False, None, True]])
+@pytest.mark.parametrize("extra", [[], [False], [None, True]])
+@pytest.mark.parametrize("shared", [False, True])
+def test_extend_boolean_offset_slice_30105(
+    offset: int,
+    values: list[bool | None],
+    extra: list[bool | None],
+    shared: bool,
+) -> None:
+    parent = pl.Series("a", [True] * offset + values, dtype=pl.Boolean)
+    result = parent.slice(offset)
+    if not shared:
+        del parent
+
+    result.extend(pl.Series(extra, dtype=pl.Boolean))
+
+    assert_series_equal(result, pl.Series("a", values + extra, dtype=pl.Boolean))
+    if shared:
+        assert parent.to_list() == [True] * offset + values

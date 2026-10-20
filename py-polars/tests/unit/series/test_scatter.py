@@ -141,3 +141,26 @@ def test_scatter_decimal_25869() -> None:
 
     with pytest.raises(InvalidOperationError):
         s.scatter(1, "test")
+
+
+@pytest.mark.parametrize("offset", [0, 1, 8, 61, 64])
+@pytest.mark.parametrize("values", [[False, True, False], [False, None, True]])
+@pytest.mark.parametrize("replacement", [False, None])
+@pytest.mark.parametrize("shared", [False, True])
+def test_scatter_boolean_offset_slice_30105(
+    offset: int,
+    values: list[bool | None],
+    replacement: bool | None,
+    shared: bool,
+) -> None:
+    parent = pl.Series("a", [True] * offset + values, dtype=pl.Boolean)
+    result = parent.slice(offset)
+    if not shared:
+        del parent
+
+    result.scatter(2, replacement)
+
+    expected = pl.Series("a", values[:2] + [replacement], dtype=pl.Boolean)
+    assert_series_equal(result, expected)
+    if shared:
+        assert parent.to_list() == [True] * offset + values
