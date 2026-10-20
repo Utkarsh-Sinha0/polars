@@ -1,0 +1,78 @@
+name: Validate hardened bitmap offset 30105
+on:
+  push:
+    branches: [validation/bitmap-offset-30105-hardening]
+permissions:
+  contents: read
+env:
+  CARGO_BUILD_JOBS: '2'
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  CARGO_PROFILE_TEST_DEBUG: '0'
+  RUSTFLAGS: -C debuginfo=0
+  PROPTEST_CASES: '1024'
+jobs:
+  bitmap:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Install pinned Rust
+        run: rustup show
+      - name: Prove baseline failure and run full bitmap suite
+        run: python tools/validate_bitmap_30105.py
+  python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - uses: ./.github/actions/clone-polars-iceberg
+      - name: Install pinned Rust
+        run: rustup show
+      - name: Install complete Python test dependencies
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install uv
+          .venv/bin/uv pip install torch --index-url https://download.pytorch.org/whl/cpu
+          .venv/bin/uv pip install -r py-polars/requirements-dev.txt -r py-polars/requirements-ci.txt ruff
+          .venv/bin/uv pip install --no-deps -e ./py-polars
+          .venv/bin/uv pip uninstall polars-runtime-compat polars-runtime-64
+          df -h .
+      - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+      - name: Build patched runtime and pinned Iceberg plugin
+        run: |
+          source .venv/bin/activate
+          make build
+          make build-polars-iceberg
+      - name: Lint and format
+        working-directory: py-polars
+        run: |
+          ../.venv/bin/ruff check --no-fix tests/unit/series/test_extend.py tests/unit/series/test_scatter.py tests/unit/dataframe/test_extend.py
+          ../.venv/bin/ruff format --check tests/unit/series/test_extend.py tests/unit/series/test_scatter.py tests/unit/dataframe/test_extend.py
+          rustup component add rustfmt
+          cargo fmt --all --check
+      - name: Run focused regressions and neighboring tests
+        working-directory: py-polars
+        run: ../.venv/bin/pytest -v tests/unit/series/test_extend.py tests/unit/series/test_scatter.py tests/unit/dataframe/test_extend.py
+      - name: Run standard repository Python suite
+        run: |
+          source .venv/bin/activate
+          make -C py-polars test PYTEST_ARGS="-n 2 --junitxml=../full-suite.xml" 2>&1 | tee full-suite.log
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: python-full-suite
+          path: |
+            full-suite.xml
+            full-suite.log
