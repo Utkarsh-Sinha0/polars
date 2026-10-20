@@ -25,6 +25,7 @@ def run_rust():
     command = ["cargo", "test", "--manifest-path", str(harness / "Cargo.toml"),
                "--test", "bitmap"]
     patched = SOURCE.read_bytes()
+    subprocess.run(["git", "fetch", "--depth=1", "origin", BASE], cwd=ROOT, check=True)
     baseline = subprocess.check_output(["git", "show", BASE + ":" + SOURCE.relative_to(ROOT).as_posix()],
                                        cwd=ROOT)
     try:

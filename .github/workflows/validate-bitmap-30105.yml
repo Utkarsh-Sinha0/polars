@@ -50,6 +50,7 @@ jobs:
         run: |
           ../.venv/bin/ruff check --no-fix tests/unit/series/test_extend.py tests/unit/series/test_scatter.py tests/unit/dataframe/test_extend.py
           ../.venv/bin/ruff format --check tests/unit/series/test_extend.py tests/unit/series/test_scatter.py tests/unit/dataframe/test_extend.py
+          rustup component add rustfmt
           cargo fmt --all --check
       - name: Run regression tests
         working-directory: py-polars
