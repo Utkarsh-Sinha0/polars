@@ -1,0 +1,719 @@
+﻿2026-10-20T22:08:30.2309866Z Current runner version: '2.337.0'
+2026-10-20T22:08:30.2331672Z ##[group]Runner Image Provisioner
+2026-10-20T22:08:30.2332321Z Hosted Compute Agent
+2026-10-20T22:08:30.2332743Z Version: 20261015.610
+2026-10-20T22:08:30.2333243Z Commit: 267fdb4e8bbec4ab5ea31367f3a00d5c480c7656
+2026-10-20T22:08:30.2333805Z Build Date: 2026-10-14T17:06:54Z
+2026-10-20T22:08:30.2334321Z Worker ID: {bb968916-a133-4911-ae00-aaf275fe2d74}
+2026-10-20T22:08:30.2334974Z Region: westus3
+2026-10-20T22:08:30.2335415Z Cloud: Azure
+2026-10-20T22:08:30.2335852Z ##[endgroup]
+2026-10-20T22:08:30.2336924Z ##[group]Operating System
+2026-10-20T22:08:30.2337789Z Microsoft Windows Server 2025
+2026-10-20T22:08:30.2338269Z 10.0.26100
+2026-10-20T22:08:30.2338675Z Datacenter
+2026-10-20T22:08:30.2339064Z ##[endgroup]
+2026-10-20T22:08:30.2339502Z ##[group]Runner Image
+2026-10-20T22:08:30.2339972Z Image: windows-2025-vs2026
+2026-10-20T22:08:30.2340553Z Version: 20261018.275.1
+2026-10-20T22:08:30.2341689Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261018.275/images/windows/Windows2025-VS2026-Readme.md
+2026-10-20T22:08:30.2342993Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261018.275
+2026-10-20T22:08:30.2343767Z ##[endgroup]
+2026-10-20T22:08:30.2344651Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T22:08:30.2346159Z Contents: read
+2026-10-20T22:08:30.2346662Z Metadata: read
+2026-10-20T22:08:30.2347071Z ##[endgroup]
+2026-10-20T22:08:30.2348729Z Secret source: Actions
+2026-10-20T22:08:30.2349477Z Cache mode: write
+2026-10-20T22:08:30.2350022Z Prepare workflow directory
+2026-10-20T22:08:30.2661235Z Prepare all required actions
+2026-10-20T22:08:30.2712808Z Getting action download info
+2026-10-20T22:08:30.5649234Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-10-20T22:08:30.6759497Z Download action repository 'actions/setup-python@v6' (SHA:ece7cb06caefa5fff74198d8649806c4678c61a1)
+2026-10-20T22:08:31.0206180Z Complete job name: bitmap (windows-latest)
+2026-10-20T22:08:31.2162192Z ##[group]Run actions/checkout@v7
+2026-10-20T22:08:31.2163003Z with:
+2026-10-20T22:08:31.2163332Z   repository: Utkarsh-Sinha0/polars
+2026-10-20T22:08:31.2166315Z   token: ***
+2026-10-20T22:08:31.2166639Z   ssh-strict: true
+2026-10-20T22:08:31.2166961Z   ssh-user: git
+2026-10-20T22:08:31.2167280Z   persist-credentials: true
+2026-10-20T22:08:31.2167636Z   clean: true
+2026-10-20T22:08:31.2167956Z   sparse-checkout-cone-mode: true
+2026-10-20T22:08:31.2168331Z   fetch-depth: 1
+2026-10-20T22:08:31.2168636Z   fetch-tags: false
+2026-10-20T22:08:31.2168954Z   show-progress: true
+2026-10-20T22:08:31.2169275Z   lfs: false
+2026-10-20T22:08:31.2169566Z   submodules: false
+2026-10-20T22:08:31.2169888Z   set-safe-directory: true
+2026-10-20T22:08:31.2170267Z   allow-unsafe-pr-checkout: false
+2026-10-20T22:08:31.2170804Z env:
+2026-10-20T22:08:31.2171195Z   CARGO_BUILD_JOBS: 2
+2026-10-20T22:08:31.2171722Z   CARGO_PROFILE_DEV_DEBUG: 0
+2026-10-20T22:08:31.2172139Z   CARGO_PROFILE_TEST_DEBUG: 0
+2026-10-20T22:08:31.2172528Z   RUSTFLAGS: -C debuginfo=0
+2026-10-20T22:08:31.2172887Z   PROPTEST_CASES: 1024
+2026-10-20T22:08:31.2173210Z ##[endgroup]
+2026-10-20T22:08:31.3655340Z Syncing repository: Utkarsh-Sinha0/polars
+2026-10-20T22:08:31.3656977Z ##[group]Getting Git version info
+2026-10-20T22:08:31.3657433Z Working directory is 'D:\a\polars\polars'
+2026-10-20T22:08:31.4382835Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-20T22:08:32.1423719Z git version 2.56.0.windows.2
+2026-10-20T22:08:32.1471017Z ##[endgroup]
+2026-10-20T22:08:32.1486331Z Temporarily overriding HOME='D:\a\_temp\ef0a84e3-a6a2-47d2-bcc6-f474f77ac4a5' before making global git config changes
+2026-10-20T22:08:32.1488392Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T22:08:32.1494988Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\polars\polars
+2026-10-20T22:08:32.2096459Z Deleting the contents of 'D:\a\polars\polars'
+2026-10-20T22:08:32.2100235Z ##[group]Determining repository object format
+2026-10-20T22:08:32.2101893Z ##[endgroup]
+2026-10-20T22:08:32.2102997Z ##[group]Initializing the repository
+2026-10-20T22:08:32.2108967Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\polars\polars
+2026-10-20T22:08:32.4943810Z Initialized empty Git repository in D:/a/polars/polars/.git/
+2026-10-20T22:08:32.4984076Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/Utkarsh-Sinha0/polars
+2026-10-20T22:08:32.5603862Z ##[endgroup]
+2026-10-20T22:08:32.5604863Z ##[group]Disabling automatic garbage collection
+2026-10-20T22:08:32.5610772Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-10-20T22:08:32.5921744Z ##[endgroup]
+2026-10-20T22:08:32.5922777Z ##[group]Setting up auth
+2026-10-20T22:08:32.5923598Z Removing SSH command configuration
+2026-10-20T22:08:32.5933043Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:08:32.6234545Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-20T22:08:34.4552188Z Removing HTTP extra header
+2026-10-20T22:08:34.4564065Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:08:34.4871826Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-20T22:08:34.9860826Z Removing includeIf entries pointing to credentials config files
+2026-10-20T22:08:34.9869693Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T22:08:35.0196424Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-20T22:08:35.4926097Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-d8615d27-78ea-47e1-af35-70a0ba54b4aa.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-10-20T22:08:35.5250149Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/polars/polars/.git.path D:\a\_temp\git-credentials-d8615d27-78ea-47e1-af35-70a0ba54b4aa.config
+2026-10-20T22:08:35.5568143Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/polars/polars/.git/worktrees/*.path D:\a\_temp\git-credentials-d8615d27-78ea-47e1-af35-70a0ba54b4aa.config
+2026-10-20T22:08:35.5946598Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-d8615d27-78ea-47e1-af35-70a0ba54b4aa.config
+2026-10-20T22:08:35.6273545Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-d8615d27-78ea-47e1-af35-70a0ba54b4aa.config
+2026-10-20T22:08:35.6586018Z ##[endgroup]
+2026-10-20T22:08:35.6586525Z ##[group]Fetching the repository
+2026-10-20T22:08:35.6596790Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +299fa35e81c303ededc77867f979d04e401ce9eb:refs/remotes/origin/validation/bitmap-offset-30105-hardening
+2026-10-20T22:08:38.4332413Z From https://github.com/Utkarsh-Sinha0/polars
+2026-10-20T22:08:38.4333790Z  * [new ref]         299fa35e81c303ededc77867f979d04e401ce9eb -> origin/validation/bitmap-offset-30105-hardening
+2026-10-20T22:08:38.4377646Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/validation/bitmap-offset-30105-hardening
+2026-10-20T22:08:38.4763332Z   origin/validation/bitmap-offset-30105-hardening
+2026-10-20T22:08:38.4803317Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/validation/bitmap-offset-30105-hardening
+2026-10-20T22:08:38.5118546Z 299fa35e81c303ededc77867f979d04e401ce9eb
+2026-10-20T22:08:38.5148149Z ##[endgroup]
+2026-10-20T22:08:38.5148555Z ##[group]Determining the checkout info
+2026-10-20T22:08:38.5149977Z ##[endgroup]
+2026-10-20T22:08:38.5157999Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-10-20T22:08:38.5595838Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-10-20T22:08:38.5897689Z ##[group]Checking out the ref
+2026-10-20T22:08:38.5905611Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B validation/bitmap-offset-30105-hardening refs/remotes/origin/validation/bitmap-offset-30105-hardening
+2026-10-20T22:08:39.3965236Z Switched to a new branch 'validation/bitmap-offset-30105-hardening'
+2026-10-20T22:08:39.4548951Z branch 'validation/bitmap-offset-30105-hardening' set up to track 'origin/validation/bitmap-offset-30105-hardening'.
+2026-10-20T22:08:39.4662503Z ##[endgroup]
+2026-10-20T22:08:39.5230728Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-10-20T22:08:39.5785035Z 299fa35e81c303ededc77867f979d04e401ce9eb
+2026-10-20T22:08:39.6434356Z ##[group]Run actions/setup-python@v6
+2026-10-20T22:08:39.6434793Z with:
+2026-10-20T22:08:39.6434955Z   python-version: 3.13
+2026-10-20T22:08:39.6435161Z   check-latest: false
+2026-10-20T22:08:39.6436996Z   token: ***
+2026-10-20T22:08:39.6437170Z   update-environment: true
+2026-10-20T22:08:39.6437354Z   allow-prereleases: false
+2026-10-20T22:08:39.6437538Z   freethreaded: false
+2026-10-20T22:08:39.6437732Z env:
+2026-10-20T22:08:39.6437867Z   CARGO_BUILD_JOBS: 2
+2026-10-20T22:08:39.6438046Z   CARGO_PROFILE_DEV_DEBUG: 0
+2026-10-20T22:08:39.6438222Z   CARGO_PROFILE_TEST_DEBUG: 0
+2026-10-20T22:08:39.6438415Z   RUSTFLAGS: -C debuginfo=0
+2026-10-20T22:08:39.6438622Z   PROPTEST_CASES: 1024
+2026-10-20T22:08:39.6438781Z ##[endgroup]
+2026-10-20T22:08:39.7826319Z ##[group]Installed versions
+2026-10-20T22:08:40.0125385Z Successfully set up CPython (3.13.16)
+2026-10-20T22:08:40.0126089Z ##[endgroup]
+2026-10-20T22:08:40.0483034Z ##[group]Run rustup show
+2026-10-20T22:08:40.0483382Z [36;1mrustup show[0m
+2026-10-20T22:08:40.3372354Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-20T22:08:40.3372641Z env:
+2026-10-20T22:08:40.3372823Z   CARGO_BUILD_JOBS: 2
+2026-10-20T22:08:40.3372997Z   CARGO_PROFILE_DEV_DEBUG: 0
+2026-10-20T22:08:40.3373182Z   CARGO_PROFILE_TEST_DEBUG: 0
+2026-10-20T22:08:40.3373377Z   RUSTFLAGS: -C debuginfo=0
+2026-10-20T22:08:40.3373554Z   PROPTEST_CASES: 1024
+2026-10-20T22:08:40.3373785Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-20T22:08:40.3374170Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.16\x64/lib/pkgconfig
+2026-10-20T22:08:40.3374522Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-20T22:08:40.3374847Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-20T22:08:40.3375552Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-20T22:08:40.3375919Z ##[endgroup]
+2026-10-20T22:08:41.6639711Z Default host: x86_64-pc-windows-msvc
+2026-10-20T22:08:41.6640092Z rustup home:  C:\Users\runneradmin\.rustup
+2026-10-20T22:08:41.6640310Z 
+2026-10-20T22:08:41.7211842Z info: syncing channel updates for nightly-2026-09-01-x86_64-pc-windows-msvc
+2026-10-20T22:08:42.4701425Z info: latest update on 2026-09-01 for version 1.100.0-nightly (0dfb098f3 2026-08-31)
+2026-10-20T22:08:42.5707269Z info: downloading 3 components
+2026-10-20T22:08:50.8160692Z warn: the missing active toolchain `nightly-2026-09-01-x86_64-pc-windows-msvc` has been auto-installed
+2026-10-20T22:08:50.8161500Z warn: auto-installation is deprecated for most `rustup` commands
+2026-10-20T22:08:50.8162105Z warn: scripts relying on this behavior in `rustup` may stop working in the future
+2026-10-20T22:08:50.8163010Z warn: to install the active toolchain, use `rustup install` instead
+2026-10-20T22:08:50.8163596Z warn: see <https://github.com/rust-lang/rustup/issues/4836> for more info
+2026-10-20T22:08:50.8164102Z installed toolchains
+2026-10-20T22:08:50.8164362Z --------------------
+2026-10-20T22:08:50.8164643Z stable-x86_64-pc-windows-msvc (default)
+2026-10-20T22:08:50.8164876Z 
+2026-10-20T22:08:50.8164968Z active toolchain
+2026-10-20T22:08:50.8165192Z ----------------
+2026-10-20T22:08:50.8165445Z name: nightly-2026-09-01-x86_64-pc-windows-msvc
+2026-10-20T22:08:50.8165891Z active because: overridden by 'D:\a\polars\polars\rust-toolchain.toml'
+2026-10-20T22:08:50.8166532Z installed targets:
+2026-10-20T22:08:50.8385272Z   x86_64-pc-windows-msvc
+2026-10-20T22:08:51.0472344Z ##[group]Run python tools/validate_bitmap_30105.py
+2026-10-20T22:08:51.0472688Z [36;1mpython tools/validate_bitmap_30105.py[0m
+2026-10-20T22:08:51.0528499Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-20T22:08:51.0528778Z env:
+2026-10-20T22:08:51.0528916Z   CARGO_BUILD_JOBS: 2
+2026-10-20T22:08:51.0529080Z   CARGO_PROFILE_DEV_DEBUG: 0
+2026-10-20T22:08:51.0529254Z   CARGO_PROFILE_TEST_DEBUG: 0
+2026-10-20T22:08:51.0529427Z   RUSTFLAGS: -C debuginfo=0
+2026-10-20T22:08:51.0529592Z   PROPTEST_CASES: 1024
+2026-10-20T22:08:51.0529817Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-20T22:08:51.0530404Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.16\x64/lib/pkgconfig
+2026-10-20T22:08:51.0530745Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-20T22:08:51.0531042Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-20T22:08:51.0531376Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-20T22:08:51.0531610Z ##[endgroup]
+2026-10-20T22:08:54.6386332Z From https://github.com/Utkarsh-Sinha0/polars
+2026-10-20T22:08:54.6386888Z  * branch            04e0a7e625288e41dadf837992553b02d30380db -> FETCH_HEAD
+2026-10-20T22:10:07.2327516Z     Updating crates.io index
+2026-10-20T22:10:07.2327911Z     Updating crates.io index
+2026-10-20T22:10:07.2328405Z      Locking 1 package to highest Rust 1.100.0-nightly compatible version as of 35 days ago
+2026-10-20T22:10:07.2328752Z       Adding hashbrown v0.17.1
+2026-10-20T22:10:07.2328949Z  Downloading crates ...
+2026-10-20T22:10:07.2329134Z   Downloaded equivalent v1.0.2
+2026-10-20T22:10:07.2329333Z   Downloaded argminmax v0.7.0
+2026-10-20T22:10:07.2329515Z   Downloaded errno v0.3.14
+2026-10-20T22:10:07.2329691Z   Downloaded castaway v0.2.4
+2026-10-20T22:10:07.2329885Z   Downloaded windows-implement v0.60.2
+2026-10-20T22:10:07.2330094Z   Downloaded dyn-clone v1.0.20
+2026-10-20T22:10:07.2330300Z   Downloaded cfg-if v1.0.4
+2026-10-20T22:10:07.2330503Z   Downloaded scopeguard v1.2.0
+2026-10-20T22:10:07.2330684Z   Downloaded version_check v0.9.5
+2026-10-20T22:10:07.2330882Z   Downloaded windows-strings v0.5.1
+2026-10-20T22:10:07.2331089Z   Downloaded heck v0.5.0
+2026-10-20T22:10:07.2331260Z   Downloaded rand_xorshift v0.4.0
+2026-10-20T22:10:07.2331449Z   Downloaded windows-interface v0.59.3
+2026-10-20T22:10:07.2331648Z   Downloaded windows-link v0.2.1
+2026-10-20T22:10:07.2331838Z   Downloaded windows-numerics v0.3.1
+2026-10-20T22:10:07.2332033Z   Downloaded itoa v1.0.18
+2026-10-20T22:10:07.2332206Z   Downloaded unarray v0.1.4
+2026-10-20T22:10:07.2332388Z   Downloaded windows-result v0.4.1
+2026-10-20T22:10:07.2332595Z   Downloaded windows-threading v0.2.1
+2026-10-20T22:10:07.2332820Z   Downloaded num-derive v0.4.2
+2026-10-20T22:10:07.2333013Z   Downloaded windows-collections v0.3.2
+2026-10-20T22:10:07.2333219Z   Downloaded cpufeatures v0.3.0
+2026-10-20T22:10:07.2333408Z   Downloaded either v1.17.0
+2026-10-20T22:10:07.2333583Z   Downloaded autocfg v1.5.1
+2026-10-20T22:10:07.2333760Z   Downloaded crossbeam-deque v0.8.7
+2026-10-20T22:10:07.2333954Z   Downloaded shlex v2.0.1
+2026-10-20T22:10:07.2334382Z   Downloaded psm v0.1.32
+2026-10-20T22:10:07.2334563Z   Downloaded static_assertions v1.1.0
+2026-10-20T22:10:07.2334806Z   Downloaded windows-future v0.3.2
+2026-10-20T22:10:07.2335058Z   Downloaded quote v1.0.47
+2026-10-20T22:10:07.2335235Z   Downloaded rand_chacha v0.9.0
+2026-10-20T22:10:07.2335424Z   Downloaded find-msvc-tools v0.1.11
+2026-10-20T22:10:07.2335621Z   Downloaded lock_api v0.4.14
+2026-10-20T22:10:07.2335806Z   Downloaded strum_macros v0.28.0
+2026-10-20T22:10:07.2335995Z   Downloaded foldhash v0.2.0
+2026-10-20T22:10:07.2336174Z   Downloaded rand_core v0.9.5
+2026-10-20T22:10:07.2336354Z   Downloaded rustversion v1.0.23
+2026-10-20T22:10:07.2336556Z   Downloaded ppv-lite86 v0.2.21
+2026-10-20T22:10:07.2336752Z   Downloaded simdutf8 v0.1.5
+2026-10-20T22:10:07.2338531Z   Downloaded stacker v0.1.25
+2026-10-20T22:10:07.2338799Z   Downloaded bytemuck_derive v1.12.0
+2026-10-20T22:10:07.2339022Z   Downloaded signal-hook-registry v1.4.8
+2026-10-20T22:10:07.2339232Z   Downloaded chacha20 v0.10.2
+2026-10-20T22:10:07.2339441Z   Downloaded parking_lot v0.12.5
+2026-10-20T22:10:07.2339637Z   Downloaded parking_lot_core v0.9.12
+2026-10-20T22:10:07.2339835Z   Downloaded rand_core v0.10.1
+2026-10-20T22:10:07.2340025Z   Downloaded streaming-iterator v0.1.9
+2026-10-20T22:10:07.2340242Z   Downloaded windows-core v0.62.2
+2026-10-20T22:10:07.2340434Z   Downloaded smallvec v1.15.2
+2026-10-20T22:10:07.2340619Z   Downloaded signal-hook v0.4.4
+2026-10-20T22:10:07.2340809Z   Downloaded crossbeam-utils v0.8.22
+2026-10-20T22:10:07.2341011Z   Downloaded crossbeam-epoch v0.9.20
+2026-10-20T22:10:07.2341207Z   Downloaded bitflags v2.13.1
+2026-10-20T22:10:07.2341432Z   Downloaded ethnum v1.5.3
+2026-10-20T22:10:07.2341737Z   Downloaded unicode-ident v1.0.24
+2026-10-20T22:10:07.2341951Z   Downloaded uuid v1.24.1
+2026-10-20T22:10:07.2342133Z   Downloaded serde_core v1.0.229
+2026-10-20T22:10:07.2342323Z   Downloaded ryu v1.0.23
+2026-10-20T22:10:07.2342498Z   Downloaded half v2.7.1
+2026-10-20T22:10:07.2342668Z   Downloaded slotmap v1.1.1
+2026-10-20T22:10:07.2342846Z   Downloaded getrandom v0.4.3
+2026-10-20T22:10:07.2343111Z   Downloaded bytemuck v1.25.2
+2026-10-20T22:10:07.2343348Z   Downloaded allocator-api2 v0.2.21
+2026-10-20T22:10:07.2343547Z   Downloaded num-traits v0.2.19
+2026-10-20T22:10:07.2343907Z   Downloaded proc-macro2 v1.0.107
+2026-10-20T22:10:07.2344109Z   Downloaded serde_derive v1.0.229
+2026-10-20T22:10:07.2344298Z   Downloaded bytes v1.12.1
+2026-10-20T22:10:07.2344473Z   Downloaded getrandom v0.3.4
+2026-10-20T22:10:07.2344660Z   Downloaded rayon-core v1.13.0
+2026-10-20T22:10:07.2344846Z   Downloaded ar_archive_writer v0.5.3
+2026-10-20T22:10:07.2345042Z   Downloaded serde v1.0.229
+2026-10-20T22:10:07.2345209Z   Downloaded cc v1.4.3
+2026-10-20T22:10:07.2345380Z   Downloaded compact_str v0.9.1
+2026-10-20T22:10:07.2345561Z   Downloaded raw-cpuid v11.6.0
+2026-10-20T22:10:07.2345737Z   Downloaded rand v0.10.2
+2026-10-20T22:10:07.2345903Z   Downloaded rand v0.9.5
+2026-10-20T22:10:07.2346068Z   Downloaded memchr v2.8.3
+2026-10-20T22:10:07.2346245Z   Downloaded zerocopy-derive v0.8.56
+2026-10-20T22:10:07.2346438Z   Downloaded indexmap v2.14.0
+2026-10-20T22:10:07.2346619Z   Downloaded ntapi v0.4.3
+2026-10-20T22:10:07.2346779Z   Downloaded libm v0.2.16
+2026-10-20T22:10:07.2346937Z   Downloaded regex v1.13.1
+2026-10-20T22:10:07.2347104Z   Downloaded aho-corasick v1.1.5
+2026-10-20T22:10:07.2347284Z   Downloaded hashbrown v0.17.1
+2026-10-20T22:10:07.2347452Z   Downloaded rayon v1.12.0
+2026-10-20T22:10:07.2347624Z   Downloaded proptest v1.11.0
+2026-10-20T22:10:07.2347801Z   Downloaded sysinfo v0.39.6
+2026-10-20T22:10:07.2347972Z   Downloaded chrono v0.4.45
+2026-10-20T22:10:07.2348138Z   Downloaded zerocopy v0.8.56
+2026-10-20T22:10:07.2348310Z   Downloaded syn v2.0.119
+2026-10-20T22:10:07.2348480Z   Downloaded syn v3.0.3
+2026-10-20T22:10:07.2348641Z   Downloaded object v0.39.1
+2026-10-20T22:10:07.2348825Z   Downloaded regex-syntax v0.8.11
+2026-10-20T22:10:07.2349018Z   Downloaded regex-automata v0.4.18
+2026-10-20T22:10:07.2349850Z   Downloaded libc v0.2.189
+2026-10-20T22:10:07.2350064Z   Downloaded winapi v0.3.9
+2026-10-20T22:10:07.2350243Z   Downloaded windows-sys v0.61.2
+2026-10-20T22:10:07.2350437Z   Downloaded windows v0.62.2
+2026-10-20T22:10:07.2350619Z    Compiling proc-macro2 v1.0.107
+2026-10-20T22:10:07.2350813Z    Compiling unicode-ident v1.0.24
+2026-10-20T22:10:07.2350998Z    Compiling quote v1.0.47
+2026-10-20T22:10:07.2351168Z    Compiling windows-link v0.2.1
+2026-10-20T22:10:07.2351347Z    Compiling cfg-if v1.0.4
+2026-10-20T22:10:07.2351517Z    Compiling version_check v0.9.5
+2026-10-20T22:10:07.2351703Z    Compiling crossbeam-utils v0.8.22
+2026-10-20T22:10:07.2351892Z    Compiling libc v0.2.189
+2026-10-20T22:10:07.2352057Z    Compiling syn v2.0.119
+2026-10-20T22:10:07.2352545Z    Compiling syn v3.0.3
+2026-10-20T22:10:07.2352729Z    Compiling windows-result v0.4.1
+2026-10-20T22:10:07.2352922Z    Compiling windows-strings v0.5.1
+2026-10-20T22:10:07.2353112Z    Compiling shlex v2.0.1
+2026-10-20T22:10:07.2353289Z    Compiling crossbeam-epoch v0.9.20
+2026-10-20T22:10:07.2353476Z    Compiling object v0.39.1
+2026-10-20T22:10:07.2353642Z    Compiling autocfg v1.5.1
+2026-10-20T22:10:07.2353824Z    Compiling windows-interface v0.59.3
+2026-10-20T22:10:07.2354027Z    Compiling windows-implement v0.60.2
+2026-10-20T22:10:07.2354222Z    Compiling find-msvc-tools v0.1.11
+2026-10-20T22:10:07.2354410Z    Compiling zerocopy v0.8.56
+2026-10-20T22:10:07.2354588Z    Compiling libm v0.2.16
+2026-10-20T22:10:07.2354748Z    Compiling cc v1.4.3
+2026-10-20T22:10:07.2354913Z    Compiling windows-core v0.62.2
+2026-10-20T22:10:07.2355094Z    Compiling num-traits v0.2.19
+2026-10-20T22:10:07.2355270Z    Compiling zerocopy-derive v0.8.56
+2026-10-20T22:10:07.2355459Z    Compiling windows-sys v0.61.2
+2026-10-20T22:10:07.2355635Z    Compiling memchr v2.8.3
+2026-10-20T22:10:07.2355802Z    Compiling crossbeam-deque v0.8.7
+2026-10-20T22:10:07.2355986Z    Compiling serde_core v1.0.229
+2026-10-20T22:10:07.2356165Z    Compiling winapi v0.3.9
+2026-10-20T22:10:07.2356333Z    Compiling rayon-core v1.13.0
+2026-10-20T22:10:07.2356523Z    Compiling parking_lot_core v0.9.12
+2026-10-20T22:10:07.2356720Z    Compiling ar_archive_writer v0.5.3
+2026-10-20T22:10:07.2356906Z    Compiling errno v0.3.14
+2026-10-20T22:10:07.2357087Z    Compiling windows-threading v0.2.1
+2026-10-20T22:10:07.2357288Z    Compiling signal-hook v0.4.4
+2026-10-20T22:10:07.2357471Z    Compiling rand_core v0.10.1
+2026-10-20T22:10:07.2357652Z    Compiling rustversion v1.0.23
+2026-10-20T22:10:07.2357834Z    Compiling ntapi v0.4.3
+2026-10-20T22:10:07.2358006Z    Compiling smallvec v1.15.2
+2026-10-20T22:10:07.2358184Z    Compiling getrandom v0.4.3
+2026-10-20T22:10:07.2358366Z    Compiling scopeguard v1.2.0
+2026-10-20T22:10:07.2358544Z    Compiling lock_api v0.4.14
+2026-10-20T22:10:07.2358722Z    Compiling windows-future v0.3.2
+2026-10-20T22:10:07.2358925Z    Compiling signal-hook-registry v1.4.8
+2026-10-20T22:10:07.2359130Z    Compiling psm v0.1.32
+2026-10-20T22:10:07.2359311Z    Compiling windows-collections v0.3.2
+2026-10-20T22:10:07.2359522Z    Compiling windows-numerics v0.3.1
+2026-10-20T22:10:07.2359719Z    Compiling bytemuck_derive v1.12.0
+2026-10-20T22:10:07.2359910Z    Compiling serde v1.0.229
+2026-10-20T22:10:07.2360083Z    Compiling either v1.17.0
+2026-10-20T22:10:07.2360261Z    Compiling getrandom v0.3.4
+2026-10-20T22:10:07.2360440Z    Compiling regex-syntax v0.8.11
+2026-10-20T22:10:07.2360623Z    Compiling bytemuck v1.25.2
+2026-10-20T22:10:07.2360798Z    Compiling rayon v1.12.0
+2026-10-20T22:10:07.2360967Z    Compiling windows v0.62.2
+2026-10-20T22:10:07.2361144Z    Compiling parking_lot v0.12.5
+2026-10-20T22:10:07.2361327Z    Compiling aho-corasick v1.1.5
+2026-10-20T22:10:07.2361550Z    Compiling stacker v0.1.25
+2026-10-20T22:10:07.2361818Z    Compiling serde_derive v1.0.229
+2026-10-20T22:10:07.2362009Z    Compiling slotmap v1.1.1
+2026-10-20T22:10:07.2362178Z    Compiling bitflags v2.13.1
+2026-10-20T22:10:07.2362459Z    Compiling allocator-api2 v0.2.21
+2026-10-20T22:10:07.2362651Z    Compiling cpufeatures v0.3.0
+2026-10-20T22:10:07.2362827Z    Compiling simdutf8 v0.1.5
+2026-10-20T22:10:07.2362994Z    Compiling foldhash v0.2.0
+2026-10-20T22:10:07.2363161Z    Compiling equivalent v1.0.2
+2026-10-20T22:10:07.2363333Z    Compiling hashbrown v0.17.1
+2026-10-20T22:10:07.2363594Z    Compiling polars-error v0.55.1 (D:\a\polars\polars\crates\polars-error)
+2026-10-20T22:10:07.2364030Z    Compiling chacha20 v0.10.2
+2026-10-20T22:10:07.2364212Z    Compiling regex-automata v0.4.18
+2026-10-20T22:10:07.2364398Z    Compiling sysinfo v0.39.6
+2026-10-20T22:10:07.2364575Z    Compiling castaway v0.2.4
+2026-10-20T22:10:07.2364742Z    Compiling half v2.7.1
+2026-10-20T22:10:07.2365059Z    Compiling polars-utils v0.55.1 (D:\a\polars\polars\crates\polars-utils)
+2026-10-20T22:10:07.2365356Z    Compiling static_assertions v1.1.0
+2026-10-20T22:10:07.2365555Z    Compiling itoa v1.0.18
+2026-10-20T22:10:07.2365728Z    Compiling ryu v1.0.23
+2026-10-20T22:10:07.2365898Z    Compiling argminmax v0.7.0
+2026-10-20T22:10:07.2366080Z    Compiling compact_str v0.9.1
+2026-10-20T22:10:07.2366262Z    Compiling rand_core v0.9.5
+2026-10-20T22:10:07.2366525Z    Compiling polars-config v0.55.1 (D:\a\polars\polars\crates\polars-config)
+2026-10-20T22:10:07.2366850Z    Compiling regex v1.13.1
+2026-10-20T22:10:07.2367021Z    Compiling rand v0.10.2
+2026-10-20T22:10:07.2367188Z    Compiling indexmap v2.14.0
+2026-10-20T22:10:07.2367365Z    Compiling raw-cpuid v11.6.0
+2026-10-20T22:10:07.2367541Z    Compiling uuid v1.24.1
+2026-10-20T22:10:07.2367708Z    Compiling num-derive v0.4.2
+2026-10-20T22:10:07.2367880Z    Compiling bytes v1.12.1
+2026-10-20T22:10:07.2368136Z    Compiling polars-schema v0.55.1 (D:\a\polars\polars\crates\polars-schema)
+2026-10-20T22:10:07.2368492Z    Compiling polars-buffer v0.55.1 (D:\a\polars\polars\crates\polars-buffer)
+2026-10-20T22:10:07.2368768Z    Compiling ppv-lite86 v0.2.21
+2026-10-20T22:10:07.2369034Z    Compiling polars-arrow v0.55.1 (D:\a\polars\polars\crates\polars-arrow)
+2026-10-20T22:10:07.2369310Z    Compiling heck v0.5.0
+2026-10-20T22:10:07.2369486Z warning: unused variable: `file`
+2026-10-20T22:10:07.2369728Z  --> D:\a\polars\polars\crates\polars-utils\src\file.rs:1:19
+2026-10-20T22:10:07.2369964Z   |
+2026-10-20T22:10:07.2370216Z 1 | pub fn close_file(file: std::fs::File) -> std::io::Result<()> {
+2026-10-20T22:10:07.2370559Z   |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_file`
+2026-10-20T22:10:07.2370826Z   |
+2026-10-20T22:10:07.2371042Z   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+2026-10-20T22:10:07.2371329Z 
+2026-10-20T22:10:07.2371439Z    Compiling strum_macros v0.28.0
+2026-10-20T22:10:07.2372017Z warning: `polars-utils` (lib) generated 1 warning (run `cargo fix --lib -p polars-utils` to apply 1 suggestion)
+2026-10-20T22:10:07.2372624Z    Compiling rand_chacha v0.9.0
+2026-10-20T22:10:07.2372880Z    Compiling rand_xorshift v0.4.0
+2026-10-20T22:10:07.2373194Z    Compiling rand v0.9.5
+2026-10-20T22:10:07.2373476Z    Compiling chrono v0.4.45
+2026-10-20T22:10:07.2373695Z    Compiling dyn-clone v1.0.20
+2026-10-20T22:10:07.2373872Z    Compiling unarray v0.1.4
+2026-10-20T22:10:07.2374054Z    Compiling streaming-iterator v0.1.9
+2026-10-20T22:10:07.2374254Z    Compiling ethnum v1.5.3
+2026-10-20T22:10:07.2374433Z    Compiling proptest v1.11.0
+2026-10-20T22:10:07.2374728Z    Compiling bitmap-offset-validation v0.0.0 (D:\a\polars\polars\.validation-arrow)
+2026-10-20T22:10:07.2375092Z     Finished `test` profile [unoptimized] target(s) in 1m 11s
+2026-10-20T22:10:07.2375607Z      Running tests\bitmap.rs (.validation-arrow\target\debug\build\bitmap-offset-validation/cb72cb79ddbf760e\out\bitmap-cb72cb79ddbf760e.exe)
+2026-10-20T22:10:07.2375999Z 
+2026-10-20T22:10:07.2376059Z running 9 tests
+2026-10-20T22:10:07.2376230Z test bitmap::immutable::debug ... ok
+2026-10-20T22:10:07.2376449Z test bitmap::immutable::as_slice_offset ... ok
+2026-10-20T22:10:07.2376829Z test bitmap::immutable::as_slice_offset_middle ... ok
+2026-10-20T22:10:07.2377075Z test bitmap::immutable::as_slice ... ok
+2026-10-20T22:10:07.2377337Z test bitmap::immutable::into_mut_zero_offset_reuses_storage ... ok
+2026-10-20T22:10:07.2377621Z test bitmap::immutable::into_mut_sliced ... FAILED
+2026-10-20T22:10:07.2377874Z test bitmap::immutable::make_mut_sliced ... FAILED
+2026-10-20T22:10:07.2378112Z test bitmap::immutable::split_at_unset_bits ... ok
+2026-10-20T22:10:07.2378372Z test bitmap::immutable::make_mut_sliced_matches_vec ... FAILED
+2026-10-20T22:10:07.2378549Z 
+2026-10-20T22:10:07.2378610Z failures:
+2026-10-20T22:10:07.2378685Z 
+2026-10-20T22:10:07.2378789Z ---- bitmap::immutable::into_mut_sliced stdout ----
+2026-10-20T22:10:07.2379020Z 
+2026-10-20T22:10:07.2379298Z thread 'bitmap::immutable::into_mut_sliced' (1700) panicked at tests\..\..\crates\polars\tests\it\arrow\bitmap\immutable.rs:12:47:
+2026-10-20T22:10:07.2379717Z called `Option::unwrap()` on a `None` value
+2026-10-20T22:10:07.2380019Z note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2026-10-20T22:10:07.2380242Z 
+2026-10-20T22:10:07.2380345Z ---- bitmap::immutable::make_mut_sliced stdout ----
+2026-10-20T22:10:07.2380500Z 
+2026-10-20T22:10:07.2380770Z thread 'bitmap::immutable::make_mut_sliced' (860) panicked at tests\..\..\crates\polars\tests\it\arrow\bitmap\immutable.rs:43:13:
+2026-10-20T22:10:07.2381171Z assertion `left == right` failed
+2026-10-20T22:10:07.2381352Z   left: [true]
+2026-10-20T22:10:07.2381492Z  right: [false]
+2026-10-20T22:10:07.2381584Z 
+2026-10-20T22:10:07.2381755Z ---- bitmap::immutable::make_mut_sliced_matches_vec stdout ----
+2026-10-20T22:10:07.2382390Z proptest: Saving this and future failures in D:\a\polars\polars\.validation-arrow\tests\..\..\crates\polars\tests\proptest-regressions\arrow\bitmap\immutable.txt
+2026-10-20T22:10:07.2383110Z proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
+2026-10-20T22:10:07.2383600Z cc d1e8cda1061a4fd30d32f88fb1f9d913a8cff36ec700d1991324da273c3e420e
+2026-10-20T22:10:07.2383805Z 
+2026-10-20T22:10:07.2384276Z thread 'bitmap::immutable::make_mut_sliced_matches_vec' (1768) panicked at tests\..\..\crates\polars\tests\it\arrow\bitmap\immutable.rs:53:1:
+2026-10-20T22:10:07.2385068Z Test failed: assertion failed: mutable.iter().eq(expected.iter().copied()) at tests\..\..\crates\polars\tests\it\arrow\bitmap\immutable.rs:73.
+2026-10-20T22:10:07.2385582Z minimal failing input: values = [
+2026-10-20T22:10:07.2385762Z     false,
+2026-10-20T22:10:07.2385892Z     false,
+2026-10-20T22:10:07.2386014Z     false,
+2026-10-20T22:10:07.2386151Z     false,
+2026-10-20T22:10:07.2386277Z     false,
+2026-10-20T22:10:07.2386421Z     false,
+2026-10-20T22:10:07.2386541Z     false,
+2026-10-20T22:10:07.2386662Z     false,
+2026-10-20T22:10:07.2386780Z     false,
+2026-10-20T22:10:07.2386903Z     false,
+2026-10-20T22:10:07.2387026Z     false,
+2026-10-20T22:10:07.2387149Z     false,
+2026-10-20T22:10:07.2387272Z     false,
+2026-10-20T22:10:07.2387393Z     false,
+2026-10-20T22:10:07.2387516Z     false,
+2026-10-20T22:10:07.2387638Z     false,
+2026-10-20T22:10:07.2387824Z     false,
+2026-10-20T22:10:07.2388012Z     false,
+2026-10-20T22:10:07.2388183Z     false,
+2026-10-20T22:10:07.2388359Z     false,
+2026-10-20T22:10:07.2388553Z     false,
+2026-10-20T22:10:07.2388747Z     false,
+2026-10-20T22:10:07.2388938Z     false,
+2026-10-20T22:10:07.2389104Z     false,
+2026-10-20T22:10:07.2389236Z     false,
+2026-10-20T22:10:07.2389390Z     false,
+2026-10-20T22:10:07.2389587Z     false,
+2026-10-20T22:10:07.2389774Z     false,
+2026-10-20T22:10:07.2389984Z     false,
+2026-10-20T22:10:07.2390181Z     false,
+2026-10-20T22:10:07.2390382Z     false,
+2026-10-20T22:10:07.2390583Z     false,
+2026-10-20T22:10:07.2390804Z     false,
+2026-10-20T22:10:07.2390952Z     false,
+2026-10-20T22:10:07.2391081Z     false,
+2026-10-20T22:10:07.2391328Z     false,
+2026-10-20T22:10:07.2391451Z     false,
+2026-10-20T22:10:07.2391576Z     false,
+2026-10-20T22:10:07.2391700Z     false,
+2026-10-20T22:10:07.2391826Z     false,
+2026-10-20T22:10:07.2391957Z     false,
+2026-10-20T22:10:07.2392081Z     false,
+2026-10-20T22:10:07.2392203Z     false,
+2026-10-20T22:10:07.2392328Z     false,
+2026-10-20T22:10:07.2392451Z     false,
+2026-10-20T22:10:07.2392571Z     false,
+2026-10-20T22:10:07.2392691Z     false,
+2026-10-20T22:10:07.2392814Z     false,
+2026-10-20T22:10:07.2392934Z     false,
+2026-10-20T22:10:07.2393057Z     false,
+2026-10-20T22:10:07.2393179Z     false,
+2026-10-20T22:10:07.2393303Z     false,
+2026-10-20T22:10:07.2393423Z     false,
+2026-10-20T22:10:07.2393552Z     false,
+2026-10-20T22:10:07.2393672Z     false,
+2026-10-20T22:10:07.2394288Z     false,
+2026-10-20T22:10:07.2394418Z     false,
+2026-10-20T22:10:07.2394543Z     false,
+2026-10-20T22:10:07.2394666Z     false,
+2026-10-20T22:10:07.2394789Z     false,
+2026-10-20T22:10:07.2394918Z     false,
+2026-10-20T22:10:07.2395040Z     false,
+2026-10-20T22:10:07.2395163Z     false,
+2026-10-20T22:10:07.2395287Z     false,
+2026-10-20T22:10:07.2395414Z     false,
+2026-10-20T22:10:07.2395543Z     false,
+2026-10-20T22:10:07.2395667Z     false,
+2026-10-20T22:10:07.2395846Z     false,
+2026-10-20T22:10:07.2396039Z     false,
+2026-10-20T22:10:07.2396233Z     false,
+2026-10-20T22:10:07.2396430Z     false,
+2026-10-20T22:10:07.2396631Z     false,
+2026-10-20T22:10:07.2396830Z     false,
+2026-10-20T22:10:07.2397017Z     false,
+2026-10-20T22:10:07.2397208Z     false,
+2026-10-20T22:10:07.2397392Z     false,
+2026-10-20T22:10:07.2397577Z     false,
+2026-10-20T22:10:07.2397776Z     false,
+2026-10-20T22:10:07.2397971Z     false,
+2026-10-20T22:10:07.2398157Z     false,
+2026-10-20T22:10:07.2398288Z     false,
+2026-10-20T22:10:07.2398412Z     false,
+2026-10-20T22:10:07.2398534Z     false,
+2026-10-20T22:10:07.2398657Z     false,
+2026-10-20T22:10:07.2398780Z     false,
+2026-10-20T22:10:07.2398906Z     false,
+2026-10-20T22:10:07.2399063Z     false,
+2026-10-20T22:10:07.2399249Z     false,
+2026-10-20T22:10:07.2399434Z     false,
+2026-10-20T22:10:07.2399613Z     false,
+2026-10-20T22:10:07.2399806Z     false,
+2026-10-20T22:10:07.2399991Z     false,
+2026-10-20T22:10:07.2400176Z     false,
+2026-10-20T22:10:07.2400356Z     false,
+2026-10-20T22:10:07.2400539Z     false,
+2026-10-20T22:10:07.2400731Z     false,
+2026-10-20T22:10:07.2400923Z     false,
+2026-10-20T22:10:07.2401113Z     false,
+2026-10-20T22:10:07.2401301Z     false,
+2026-10-20T22:10:07.2401507Z     false,
+2026-10-20T22:10:07.2401699Z     false,
+2026-10-20T22:10:07.2401896Z     false,
+2026-10-20T22:10:07.2402104Z     false,
+2026-10-20T22:10:07.2402297Z     false,
+2026-10-20T22:10:07.2402495Z     false,
+2026-10-20T22:10:07.2402662Z     false,
+2026-10-20T22:10:07.2402789Z     false,
+2026-10-20T22:10:07.2402911Z     false,
+2026-10-20T22:10:07.2403038Z     false,
+2026-10-20T22:10:07.2403163Z     false,
+2026-10-20T22:10:07.2403290Z     false,
+2026-10-20T22:10:07.2403416Z     true,
+2026-10-20T22:10:07.2403542Z     false,
+2026-10-20T22:10:07.2403758Z ], start = 48, size = 64, shared = false, cached = false, appended = false
+2026-10-20T22:10:07.2404183Z 	successes: 1
+2026-10-20T22:10:07.2404335Z 	local rejects: 0
+2026-10-20T22:10:07.2404485Z 	global rejects: 0
+2026-10-20T22:10:07.2404574Z 
+2026-10-20T22:10:07.2404578Z 
+2026-10-20T22:10:07.2404582Z 
+2026-10-20T22:10:07.2404645Z failures:
+2026-10-20T22:10:07.2404811Z     bitmap::immutable::into_mut_sliced
+2026-10-20T22:10:07.2405020Z     bitmap::immutable::make_mut_sliced
+2026-10-20T22:10:07.2405276Z     bitmap::immutable::make_mut_sliced_matches_vec
+2026-10-20T22:10:07.2405505Z 
+2026-10-20T22:10:07.2405705Z test result: FAILED. 6 passed; 3 failed; 0 ignored; 0 measured; 91 filtered out; finished in 0.01s
+2026-10-20T22:10:07.2405975Z 
+2026-10-20T22:10:07.2406083Z error: test failed, to rerun pass `--test bitmap`
+2026-10-20T22:10:07.2406238Z 
+2026-10-20T22:10:07.3880530Z warning: unused variable: `file`
+2026-10-20T22:10:07.3881005Z  --> D:\a\polars\polars\crates\polars-utils\src\file.rs:1:19
+2026-10-20T22:10:07.3881396Z   |
+2026-10-20T22:10:07.3881736Z 1 | pub fn close_file(file: std::fs::File) -> std::io::Result<()> {
+2026-10-20T22:10:07.3882312Z   |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_file`
+2026-10-20T22:10:07.3882761Z   |
+2026-10-20T22:10:07.3883107Z   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+2026-10-20T22:10:07.3883482Z 
+2026-10-20T22:10:07.3883885Z warning: `polars-utils` (lib) generated 1 warning (run `cargo fix --lib -p polars-utils` to apply 1 suggestion)
+2026-10-20T22:10:07.3890375Z    Compiling polars-arrow v0.55.1 (D:\a\polars\polars\crates\polars-arrow)
+2026-10-20T22:10:12.9492869Z    Compiling bitmap-offset-validation v0.0.0 (D:\a\polars\polars\.validation-arrow)
+2026-10-20T22:10:14.0186229Z     Finished `test` profile [unoptimized] target(s) in 6.76s
+2026-10-20T22:10:14.0265502Z      Running tests\bitmap.rs (.validation-arrow\target\debug\build\bitmap-offset-validation/cb72cb79ddbf760e\out\bitmap-cb72cb79ddbf760e.exe)
+2026-10-20T22:10:14.0333937Z 
+2026-10-20T22:10:14.0334157Z running 100 tests
+2026-10-20T22:10:14.0340374Z test bitmap::and_offset ... ok
+2026-10-20T22:10:14.0341255Z test bitmap::and ... ok
+2026-10-20T22:10:14.0342697Z test bitmap::assign_ops::binary_assign_oob ... ok
+2026-10-20T22:10:14.0343575Z test bitmap::assign_ops::basics ... ok
+2026-10-20T22:10:14.0343952Z test bitmap::assign_ops::fast_paths ... ok
+2026-10-20T22:10:14.0372723Z test bitmap::eq ... ok
+2026-10-20T22:10:14.0374899Z test bitmap::eq_len ... ok
+2026-10-20T22:10:14.0375616Z test bitmap::bitmap_ops::test_fast_paths ... ok
+2026-10-20T22:10:14.0376116Z test bitmap::eq_slice ... ok
+2026-10-20T22:10:14.0377368Z test bitmap::immutable::as_slice ... ok
+2026-10-20T22:10:14.0379701Z test bitmap::immutable::as_slice_offset ... ok
+2026-10-20T22:10:14.0380459Z test bitmap::immutable::as_slice_offset_middle ... ok
+2026-10-20T22:10:14.0382194Z test bitmap::immutable::debug ... ok
+2026-10-20T22:10:14.0382930Z test bitmap::immutable::into_mut_sliced ... ok
+2026-10-20T22:10:14.0384507Z test bitmap::immutable::into_mut_zero_offset_reuses_storage ... ok
+2026-10-20T22:10:14.0385348Z test bitmap::immutable::make_mut_sliced ... ok
+2026-10-20T22:10:14.0385968Z test bitmap::immutable::split_at_unset_bits ... ok
+2026-10-20T22:10:14.0388036Z test bitmap::mutable::capacity ... ok
+2026-10-20T22:10:14.0390579Z test bitmap::mutable::capacity_push ... ok
+2026-10-20T22:10:14.0393231Z test bitmap::mutable::clear ... ok
+2026-10-20T22:10:14.0395773Z test bitmap::mutable::debug ... ok
+2026-10-20T22:10:14.0398213Z test bitmap::mutable::extend ... ok
+2026-10-20T22:10:14.0405674Z test bitmap::mutable::extend_bitmap ... ok
+2026-10-20T22:10:14.0408270Z test bitmap::mutable::extend_bitmap_one ... ok
+2026-10-20T22:10:14.0410696Z test bitmap::mutable::extend_bitmap_other ... ok
+2026-10-20T22:10:14.0721698Z test bitmap::mutable::extend_constant1 ... ok
+2026-10-20T22:10:14.0728716Z test bitmap::mutable::extend_from_bitmap ... ok
+2026-10-20T22:10:14.0731408Z test bitmap::mutable::extend_from_bitmap_offset ... ok
+2026-10-20T22:10:14.0734282Z test bitmap::mutable::extend_offset ... ok
+2026-10-20T22:10:14.0736841Z test bitmap::mutable::extend_set ... ok
+2026-10-20T22:10:14.0739606Z test bitmap::mutable::extend_unset ... ok
+2026-10-20T22:10:14.0742084Z test bitmap::mutable::from_len_set ... ok
+2026-10-20T22:10:14.0744578Z test bitmap::mutable::from_len_zeroed ... ok
+2026-10-20T22:10:14.0747238Z test bitmap::mutable::from_slice ... ok
+2026-10-20T22:10:14.0751134Z test bitmap::mutable::pop ... ok
+2026-10-20T22:10:14.0753424Z test bitmap::mutable::pop_all ... ok
+2026-10-20T22:10:14.0755829Z test bitmap::mutable::pop_large ... ok
+2026-10-20T22:10:14.0758162Z test bitmap::mutable::push ... ok
+2026-10-20T22:10:14.0760547Z test bitmap::mutable::push_exact_ones ... ok
+2026-10-20T22:10:14.0763889Z test bitmap::mutable::push_exact_zeros ... ok
+2026-10-20T22:10:14.0766580Z test bitmap::mutable::push_small ... ok
+2026-10-20T22:10:14.0768996Z test bitmap::mutable::set ... ok
+2026-10-20T22:10:14.0784547Z test bitmap::mutable::shrink_to_fit ... ok
+2026-10-20T22:10:14.0788776Z test bitmap::mutable::trusted_len ... ok
+2026-10-20T22:10:14.0791325Z test bitmap::mutable::trusted_len_small ... ok
+2026-10-20T22:10:14.0793810Z test bitmap::mutable::try_new_invalid ... ok
+2026-10-20T22:10:14.0796277Z test bitmap::not ... ok
+2026-10-20T22:10:14.0798640Z test bitmap::or ... ok
+2026-10-20T22:10:14.0800951Z test bitmap::or_large ... ok
+2026-10-20T22:10:14.0803345Z test bitmap::split_at ... ok
+2026-10-20T22:10:14.0805770Z test bitmap::subslicing_gives_correct_null_count ... ok
+2026-10-20T22:10:14.0808831Z test bitmap::utils::bit_chunks_exact::basics ... ok
+2026-10-20T22:10:14.0812883Z test bitmap::utils::bit_chunks_exact::basics_u16 ... ok
+2026-10-20T22:10:14.0815548Z test bitmap::utils::bit_chunks_exact::basics_u16_small ... ok
+2026-10-20T22:10:14.0818108Z test bitmap::utils::bit_chunks_exact::remainder_u16 ... ok
+2026-10-20T22:10:14.0820569Z test bitmap::utils::chunk_iter::basics ... ok
+2026-10-20T22:10:14.0822860Z test bitmap::utils::chunk_iter::basics_1 ... ok
+2026-10-20T22:10:14.0825382Z test bitmap::utils::chunk_iter::basics_2 ... ok
+2026-10-20T22:10:14.0827989Z test bitmap::utils::chunk_iter::basics_multiple ... ok
+2026-10-20T22:10:14.0830424Z test bitmap::utils::chunk_iter::basics_multiple_offset ... ok
+2026-10-20T22:10:14.0832944Z test bitmap::utils::chunk_iter::basics_offset ... ok
+2026-10-20T22:10:14.0835485Z test bitmap::utils::chunk_iter::basics_offset_remainder ... ok
+2026-10-20T22:10:14.0838100Z test bitmap::utils::chunk_iter::offset_remainder_saturating ... ok
+2026-10-20T22:10:14.0840741Z test bitmap::utils::chunk_iter::offset_remainder_saturating2 ... ok
+2026-10-20T22:10:14.0843359Z test bitmap::utils::chunk_iter::offset_remainder_saturating3 ... ok
+2026-10-20T22:10:14.0845862Z test bitmap::utils::chunk_iter::remainder ... ok
+2026-10-20T22:10:14.0848779Z test bitmap::utils::chunk_iter::remainder_1 ... ok
+2026-10-20T22:10:14.0851412Z test bitmap::utils::chunk_iter::remainder_2 ... ok
+2026-10-20T22:10:14.0853882Z test bitmap::utils::chunk_iter::remainder_large ... ok
+2026-10-20T22:10:14.0856617Z test bitmap::utils::chunk_iter::remainder_saturating ... ok
+2026-10-20T22:10:14.0859099Z test bitmap::utils::count_zeros_1 ... ok
+2026-10-20T22:10:14.0861353Z test bitmap::utils::count_zeros_basics ... ok
+2026-10-20T22:10:14.0864148Z test bitmap::utils::fmt::test_debug ... ok
+2026-10-20T22:10:14.0866902Z test bitmap::utils::get_bit_basics ... ok
+2026-10-20T22:10:14.0869462Z test bitmap::utils::iterator::basic ... ok
+2026-10-20T22:10:14.0871865Z test bitmap::utils::iterator::large ... ok
+2026-10-20T22:10:14.0874224Z test bitmap::utils::iterator::offset ... ok
+2026-10-20T22:10:14.0876513Z test bitmap::utils::iterator::rev ... ok
+2026-10-20T22:10:14.1620692Z test bitmap::immutable::make_mut_sliced_matches_vec ... ok
+2026-10-20T22:10:14.1714668Z test bitmap::utils::slice_iterator::bla ... ok
+2026-10-20T22:10:14.3732798Z test bitmap::bitmap_ops::not ... ok
+2026-10-20T22:10:14.3772334Z test bitmap::assign_ops::not ... ok
+2026-10-20T22:10:14.3773316Z test bitmap::utils::slice_iterator::end_of_byte ... ok
+2026-10-20T22:10:14.3776716Z test bitmap::utils::slice_iterator::generic ... ok
+2026-10-20T22:10:14.3777722Z test bitmap::utils::slice_iterator::incomplete_byte ... ok
+2026-10-20T22:10:14.3781099Z test bitmap::utils::slice_iterator::incomplete_byte1 ... ok
+2026-10-20T22:10:14.3782240Z test bitmap::utils::slice_iterator::past_end_should_not_be_returned ... ok
+2026-10-20T22:10:14.3785699Z test bitmap::utils::slice_iterator::remainder_1 ... ok
+2026-10-20T22:10:14.3786616Z test bitmap::utils::slice_iterator::single_set ... ok
+2026-10-20T22:10:14.3790211Z test bitmap::utils::slice_iterator::single_unset ... ok
+2026-10-20T22:10:14.3791246Z test bitmap::utils::slice_iterator::sliced ... ok
+2026-10-20T22:10:14.3795107Z test bitmap::utils::zip_validity::basic ... ok
+2026-10-20T22:10:14.3796078Z test bitmap::utils::zip_validity::byte ... ok
+2026-10-20T22:10:14.3799619Z test bitmap::utils::zip_validity::complete ... ok
+2026-10-20T22:10:14.3800571Z test bitmap::utils::zip_validity::none ... ok
+2026-10-20T22:10:14.3803549Z test bitmap::utils::zip_validity::offset ... ok
+2026-10-20T22:10:14.3804331Z test bitmap::utils::zip_validity::rev ... ok
+2026-10-20T22:10:14.3806392Z test bitmap::utils::zip_validity::slices ... ok
+2026-10-20T22:10:14.4161093Z test bitmap::utils::null_count ... ok
+2026-10-20T22:10:14.4872299Z test bitmap::utils::slice_iterator::check_invariants ... ok
+2026-10-20T22:10:14.4872618Z 
+2026-10-20T22:10:14.4873274Z test result: ok. 100 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.45s
+2026-10-20T22:10:14.4873686Z 
+2026-10-20T22:10:14.6151342Z Post job cleanup.
+2026-10-20T22:10:14.7728100Z Post job cleanup.
+2026-10-20T22:10:14.9174572Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-20T22:10:14.9484331Z git version 2.56.0.windows.2
+2026-10-20T22:10:14.9551829Z Temporarily overriding HOME='D:\a\_temp\cf74fc0a-a862-46a9-aaaa-ebe41de13216' before making global git config changes
+2026-10-20T22:10:14.9553158Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T22:10:14.9562291Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\polars\polars
+2026-10-20T22:10:14.9919535Z Removing SSH command configuration
+2026-10-20T22:10:14.9930480Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:10:15.0289177Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-20T22:10:15.6352159Z Removing HTTP extra header
+2026-10-20T22:10:15.6360988Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:10:15.6685116Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-20T22:10:16.1626737Z Removing includeIf entries pointing to credentials config files
+2026-10-20T22:10:16.1636764Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T22:10:16.1928058Z includeif.gitdir:D:/a/polars/polars/.git.path
+2026-10-20T22:10:16.1928580Z includeif.gitdir:D:/a/polars/polars/.git/worktrees/*.path
+2026-10-20T22:10:16.1929255Z includeif.gitdir:/github/workspace/.git.path
+2026-10-20T22:10:16.1929681Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-20T22:10:16.1969322Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/polars/polars/.git.path
+2026-10-20T22:10:16.2253196Z D:\a\_temp\git-credentials-d8615d27-78ea-47e1-af35-70a0ba54b4aa.config
+2026-10-20T22:10:16.2298112Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/polars/polars/.git.path D\:\\a\\_temp\\git\-credentials\-d8615d27\-78ea\-47e1\-af35\-70a0ba54b4aa\.config
+2026-10-20T22:10:16.2666407Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/polars/polars/.git/worktrees/*.path
+2026-10-20T22:10:16.2941462Z D:\a\_temp\git-credentials-d8615d27-78ea-47e1-af35-70a0ba54b4aa.config
+2026-10-20T22:10:16.2979391Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/polars/polars/.git/worktrees/*.path D\:\\a\\_temp\\git\-credentials\-d8615d27\-78ea\-47e1\-af35\-70a0ba54b4aa\.config
+2026-10-20T22:10:16.3296827Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-20T22:10:16.3577714Z /github/runner_temp/git-credentials-d8615d27-78ea-47e1-af35-70a0ba54b4aa.config
+2026-10-20T22:10:16.3622094Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-d8615d27\-78ea\-47e1\-af35\-70a0ba54b4aa\.config
+2026-10-20T22:10:16.3952034Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-20T22:10:16.4224025Z /github/runner_temp/git-credentials-d8615d27-78ea-47e1-af35-70a0ba54b4aa.config
+2026-10-20T22:10:16.4262072Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-d8615d27\-78ea\-47e1\-af35\-70a0ba54b4aa\.config
+2026-10-20T22:10:16.4582232Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-20T22:10:16.9550769Z Removing credentials config 'D:\a\_temp\git-credentials-d8615d27-78ea-47e1-af35-70a0ba54b4aa.config'
+2026-10-20T22:10:16.9725929Z Cleaning up orphan processes
+2026-10-20T22:10:17.0133910Z Terminate orphan process: pid (8452) (vctip)

@@ -1,0 +1,209 @@
+diff --git a/crates/polars-arrow/src/bitmap/immutable.rs b/crates/polars-arrow/src/bitmap/immutable.rs
+index 96663ea..52ed6a1 100644
+--- a/crates/polars-arrow/src/bitmap/immutable.rs
++++ b/crates/polars-arrow/src/bitmap/immutable.rs
+@@ -388,6 +388,9 @@ impl Bitmap {
+     /// * this [`Bitmap`] has not been cloned (i.e. [`Arc`]`::get_mut` yields [`Some`])
+     /// * this [`Bitmap`] was not imported from the c data interface (FFI)
+     pub fn into_mut(mut self) -> Either<Self, MutableBitmap> {
++        if self.offset != 0 {
++            return Either::Left(self);
++        }
+         match self.storage.try_into_vec() {
+             Ok(v) => Either::Right(MutableBitmap::from_vec(v, self.length)),
+             Err(storage) => {
+diff --git a/crates/polars/tests/it/arrow/bitmap/immutable.rs b/crates/polars/tests/it/arrow/bitmap/immutable.rs
+index 18a6d91..bb5aec7 100644
+--- a/crates/polars/tests/it/arrow/bitmap/immutable.rs
++++ b/crates/polars/tests/it/arrow/bitmap/immutable.rs
+@@ -1,5 +1,84 @@
+ use polars_arrow::array::Splitable;
+ use polars_arrow::bitmap::Bitmap;
++use proptest::prelude::*;
++
++#[test]
++fn into_mut_sliced() {
++    for offset in [1, 7, 8, 63, 64] {
++        let mut values = vec![true; offset];
++        values.extend([false, true, false]);
++        let bitmap = Bitmap::from(values).sliced(offset, 3);
++
++        let bitmap = bitmap.into_mut().left().unwrap();
++        assert_eq!(bitmap.iter().collect::<Vec<_>>(), [false, true, false]);
++        assert_eq!(bitmap.unset_bits(), 2);
++    }
++}
++
++#[test]
++fn into_mut_zero_offset_reuses_storage() {
++    let bitmap = Bitmap::from([false, true, false, true, true]).sliced(0, 3);
++    let ptr = bitmap.as_slice().0.as_ptr();
++
++    let mut mutable = bitmap.into_mut().right().unwrap();
++    assert_eq!(mutable.as_slice().as_ptr(), ptr);
++    assert_eq!(mutable.iter().collect::<Vec<_>>(), [false, true, false]);
++    mutable.push(false);
++    assert_eq!(
++        mutable.iter().collect::<Vec<_>>(),
++        [false, true, false, false]
++    );
++}
++
++#[test]
++fn make_mut_sliced() {
++    for offset in [0, 1, 7, 8, 63, 64] {
++        for length in [0, 1, 3, 65] {
++            let expected: Vec<_> = (0..length).map(|i| i % 3 == 1).collect();
++            let mut values = vec![true; offset];
++            values.extend(&expected);
++            let bitmap = Bitmap::from(values).sliced(offset, length);
++
++            let mut mutable = bitmap.make_mut();
++            assert_eq!(mutable.iter().collect::<Vec<_>>(), expected);
++            mutable.push(true);
++            assert_eq!(
++                mutable.iter().collect::<Vec<_>>(),
++                expected.into_iter().chain([true]).collect::<Vec<_>>()
++            );
++        }
++    }
++}
++
++proptest! {
++    #[test]
++    fn make_mut_sliced_matches_vec(
++        values in proptest::collection::vec(any::<bool>(), 0..257),
++        start in 0usize..257,
++        size in 0usize..257,
++        shared in any::<bool>(),
++        cached in any::<bool>(),
++        appended in any::<bool>(),
++    ) {
++        let offset = start % (values.len() + 1);
++        let length = size % (values.len() - offset + 1);
++        let mut expected = values[offset..offset + length].to_vec();
++        let bitmap = Bitmap::from(values).sliced(offset, length);
++        if cached {
++            prop_assert_eq!(bitmap.unset_bits(), expected.iter().filter(|&&v| !v).count());
++        }
++        let parent = shared.then(|| bitmap.clone());
++
++        let mut mutable = bitmap.make_mut();
++        prop_assert!(mutable.iter().eq(expected.iter().copied()));
++        mutable.push(appended);
++        if let Some(parent) = parent {
++            prop_assert!(parent.iter().eq(expected.iter().copied()));
++        }
++        expected.push(appended);
++        prop_assert_eq!(mutable.iter().collect::<Vec<_>>(), expected);
++    }
++}
+ 
+ #[test]
+ fn as_slice() {
+diff --git a/py-polars/tests/unit/dataframe/test_extend.py b/py-polars/tests/unit/dataframe/test_extend.py
+index 4a41333..a00d139 100644
+--- a/py-polars/tests/unit/dataframe/test_extend.py
++++ b/py-polars/tests/unit/dataframe/test_extend.py
+@@ -115,3 +115,20 @@ def test_extend_nested_mismatch() -> None:
+ 
+     with pytest.raises(pl.exceptions.InvalidOperationError):
+         s.extend_constant([True], 2)
++
++
++@pytest.mark.parametrize("offset", [1, 8, 61, 64])
++def test_extend_boolean_filtered_slice_30105(offset: int) -> None:
++    df = pl.DataFrame(
++        {
++            "b": [True] * offset + [False, None, True],
++            "keep": [False] * offset + [True] * 3,
++        }
++    )
++    result = df.filter(pl.col("keep"))
++    del df
++
++    result.extend(pl.DataFrame({"b": [False], "keep": [True]}))
++
++    expected = pl.DataFrame({"b": [False, None, True, False], "keep": [True] * 4})
++    assert_frame_equal(result, expected)
+diff --git a/py-polars/tests/unit/series/test_extend.py b/py-polars/tests/unit/series/test_extend.py
+index f27595a..e11edf4 100644
+--- a/py-polars/tests/unit/series/test_extend.py
++++ b/py-polars/tests/unit/series/test_extend.py
+@@ -60,3 +60,36 @@ def test_extend_sliced_12968() -> None:
+         "a",
+         "c",
+     ]
++
++
++@pytest.mark.parametrize("offset", [0, 1, 8, 61, 64])
++@pytest.mark.parametrize(
++    "values",
++    [
++        [],
++        [False],
++        [None],
++        [False, True, False],
++        [False, None, True],
++        [None] * 65,
++        [False, None, True] * 23,
++    ],
++)
++@pytest.mark.parametrize("extra", [[], [False], [None, True]])
++@pytest.mark.parametrize("shared", [False, True])
++def test_extend_boolean_offset_slice_30105(
++    offset: int,
++    values: list[bool | None],
++    extra: list[bool | None],
++    shared: bool,
++) -> None:
++    parent = pl.Series("a", [True] * offset + values, dtype=pl.Boolean)
++    result = parent.slice(offset)
++    if not shared:
++        del parent
++
++    result.extend(pl.Series(extra, dtype=pl.Boolean))
++
++    assert_series_equal(result, pl.Series("a", values + extra, dtype=pl.Boolean))
++    if shared:
++        assert parent.to_list() == [True] * offset + values
+diff --git a/py-polars/tests/unit/series/test_scatter.py b/py-polars/tests/unit/series/test_scatter.py
+index 6e39466..c7dfcd0 100644
+--- a/py-polars/tests/unit/series/test_scatter.py
++++ b/py-polars/tests/unit/series/test_scatter.py
+@@ -141,3 +141,35 @@ def test_scatter_decimal_25869() -> None:
+ 
+     with pytest.raises(InvalidOperationError):
+         s.scatter(1, "test")
++
++
++@pytest.mark.parametrize("offset", [0, 1, 8, 61, 64])
++@pytest.mark.parametrize(
++    "values",
++    [
++        [False, True, False],
++        [False, None, True],
++        [False, True] * 33,
++        [None] * 65,
++        [False, None, True] * 23,
++    ],
++)
++@pytest.mark.parametrize("replacement", [False, None])
++@pytest.mark.parametrize("shared", [False, True])
++def test_scatter_boolean_offset_slice_30105(
++    offset: int,
++    values: list[bool | None],
++    replacement: bool | None,
++    shared: bool,
++) -> None:
++    parent = pl.Series("a", [True] * offset + values, dtype=pl.Boolean)
++    result = parent.slice(offset)
++    if not shared:
++        del parent
++
++    result.scatter(2, replacement)
++
++    expected = pl.Series("a", values[:2] + [replacement] + values[3:], dtype=pl.Boolean)
++    assert_series_equal(result, expected)
++    if shared:
++        assert parent.to_list() == [True] * offset + values

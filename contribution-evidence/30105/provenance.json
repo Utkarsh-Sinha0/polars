@@ -1,0 +1,54 @@
+{
+  "run_url": "https://github.com/Utkarsh-Sinha0/polars/actions/runs/39509583205",
+  "runner": "GitHub Actions ubuntu-latest",
+  "candidate_commit": "95260c56c1eb30b46a60da4628428206bc5db092",
+  "validation_commit": "aa5c7f2d90ce383af1ff3e4a04949533b9c2381e",
+  "capture": "Uncropped X11 desktop captures using scrot; original PNG bytes, no image edits",
+  "images": [
+    {
+      "file": "polars-30105-01-environment.png",
+      "bytes": 78624,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "395ab28dcb3de20163935b71e57a67d4296dee4939569a51bc10a42f36592f54"
+    },
+    {
+      "file": "polars-30105-02-build-running.png",
+      "bytes": 92587,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "fce010705fa4b2d11e8445e6a0c7b5302665339d26077a594c68c0f311f74c8b"
+    },
+    {
+      "file": "polars-30105-03-full-suite.png",
+      "bytes": 87787,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "1b15505a6e9d9ef7b867a9628fdf831626d21788834a235be1e99e34eb9994a5"
+    },
+    {
+      "file": "polars-30105-04-focused.png",
+      "bytes": 343602,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "2da7d8a01d9d145fc205774c7a7cc4c7737033582936512417d3eda3e726932e"
+    },
+    {
+      "file": "polars-30105-05-rust-bitmap.png",
+      "bytes": 175858,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "9a3124a02ba9c6bb2cfd306f013095fb296d83d836fea3d622c788b98abb7b42"
+    }
+  ]
+}
