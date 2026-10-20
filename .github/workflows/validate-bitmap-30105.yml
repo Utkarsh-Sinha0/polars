@@ -11,6 +11,7 @@ env:
   RUSTFLAGS: -C debuginfo=0
 jobs:
   bitmap:
+    if: ${{ contains(github.event.head_commit.message, 'Rust harness') }}
     strategy:
       fail-fast: false
       matrix:
@@ -45,7 +46,7 @@ jobs:
       - name: Build patched runtime from this checkout
         run: |
           source .venv/bin/activate
-          maturin develop --manifest-path py-polars/runtime/polars-runtime-32/Cargo.toml --no-default-features --features dtypes
+          maturin develop --manifest-path py-polars/runtime/polars-runtime-32/Cargo.toml
       - name: Lint and format
         working-directory: py-polars
         run: |
