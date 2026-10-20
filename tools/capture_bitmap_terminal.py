@@ -58,11 +58,16 @@ def main():
     deadline = time.monotonic() + 5100
     try:
         for _ in range(100):
-            windows = subprocess.check_output(['wmctrl', '-l'], text=True)
-            if TITLE in windows:
-                subprocess.run(['wmctrl', '-r', TITLE, '-b', 'add,maximized_vert,maximized_horz'], check=True)
+            windows = subprocess.run(
+                ['wmctrl', '-l'], text=True, stdout=subprocess.PIPE,
+                stderr=subprocess.DEVNULL, check=False,
+            )
+            if TITLE in windows.stdout:
+                subprocess.run(['wmctrl', '-r', TITLE, '-e', '0,30,30,1840,980'], check=True)
                 break
             time.sleep(0.1)
+        else:
+            raise RuntimeError('The terminal window did not become ready')
         for phase in phases:
             done = OUT / (phase + '.done')
             while not done.exists():
