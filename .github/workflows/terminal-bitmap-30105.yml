@@ -1,0 +1,60 @@
+name: Polars development terminal evidence
+on:
+  push:
+    branches: [validation/bitmap-offset-30105-terminal]
+permissions:
+  contents: read
+env:
+  CARGO_BUILD_JOBS: '2'
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  CARGO_PROFILE_TEST_DEBUG: '0'
+  RUSTFLAGS: -C debuginfo=0
+  PROPTEST_CASES: '1024'
+jobs:
+  terminal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - uses: ./.github/actions/clone-polars-iceberg
+      - name: Install terminal and screenshot tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth xterm openbox scrot wmctrl fonts-dejavu-core
+      - name: Install pinned Rust and Python test dependencies
+        run: |
+          rustup show
+          python -m venv .venv
+          .venv/bin/pip install uv
+          .venv/bin/uv pip install torch --index-url https://download.pytorch.org/whl/cpu
+          .venv/bin/uv pip install -r py-polars/requirements-dev.txt -r py-polars/requirements-ci.txt ruff
+          .venv/bin/uv pip install --no-deps -e ./py-polars
+          .venv/bin/uv pip uninstall polars-runtime-compat polars-runtime-64
+      - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+      - name: Run tests in a real terminal and capture the desktop
+        run: xvfb-run -a -s '-screen 0 1920x1080x24' python tools/capture_bitmap_terminal.py
+      - name: Publish screenshot bytes in the job record
+        if: always()
+        run: |
+          python - <<'PY'
+          import base64
+          from pathlib import Path
+          for path in sorted(Path('terminal-evidence').glob('*.png')):
+              data = base64.b64encode(path.read_bytes()).decode('ascii')
+              print('SCREENSHOT_BEGIN ' + path.name)
+              for start in range(0, len(data), 2048):
+                  print('SCREENSHOT_DATA ' + data[start:start + 2048])
+              print('SCREENSHOT_END ' + path.name)
+          PY
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: polars-terminal-evidence
+          path: |
+            terminal-evidence/
+            terminal-full-suite.xml
