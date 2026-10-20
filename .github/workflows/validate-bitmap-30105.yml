@@ -41,8 +41,11 @@ jobs:
       - name: Install Python test tools
         run: |
           python -m venv .venv
-          .venv/bin/pip install maturin pytest numpy hypothesis typing-extensions ruff
+          .venv/bin/pip install maturin pytest==9.0.3 pytest-xdist==3.8.0 numpy hypothesis typing-extensions ruff
           .venv/bin/pip install --no-deps -e ./py-polars
+      - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
       - name: Build patched runtime from this checkout
         run: |
           source .venv/bin/activate
