@@ -144,7 +144,16 @@ def test_scatter_decimal_25869() -> None:
 
 
 @pytest.mark.parametrize("offset", [0, 1, 8, 61, 64])
-@pytest.mark.parametrize("values", [[False, True, False], [False, None, True]])
+@pytest.mark.parametrize(
+    "values",
+    [
+        [False, True, False],
+        [False, None, True],
+        [False, True] * 33,
+        [None] * 65,
+        [False, None, True] * 23,
+    ],
+)
 @pytest.mark.parametrize("replacement", [False, None])
 @pytest.mark.parametrize("shared", [False, True])
 def test_scatter_boolean_offset_slice_30105(
@@ -160,7 +169,7 @@ def test_scatter_boolean_offset_slice_30105(
 
     result.scatter(2, replacement)
 
-    expected = pl.Series("a", values[:2] + [replacement], dtype=pl.Boolean)
+    expected = pl.Series("a", values[:2] + [replacement] + values[3:], dtype=pl.Boolean)
     assert_series_equal(result, expected)
     if shared:
         assert parent.to_list() == [True] * offset + values

@@ -1,5 +1,6 @@
 use polars_arrow::array::Splitable;
 use polars_arrow::bitmap::Bitmap;
+use proptest::prelude::*;
 
 #[test]
 fn into_mut_sliced() {
@@ -16,12 +17,17 @@ fn into_mut_sliced() {
 
 #[test]
 fn into_mut_zero_offset_reuses_storage() {
-    let bitmap = Bitmap::from([false, true, false]);
+    let bitmap = Bitmap::from([false, true, false, true, true]).sliced(0, 3);
     let ptr = bitmap.as_slice().0.as_ptr();
 
-    let mutable = bitmap.into_mut().right().unwrap();
+    let mut mutable = bitmap.into_mut().right().unwrap();
     assert_eq!(mutable.as_slice().as_ptr(), ptr);
     assert_eq!(mutable.iter().collect::<Vec<_>>(), [false, true, false]);
+    mutable.push(false);
+    assert_eq!(
+        mutable.iter().collect::<Vec<_>>(),
+        [false, true, false, false]
+    );
 }
 
 #[test]
@@ -41,6 +47,36 @@ fn make_mut_sliced() {
                 expected.into_iter().chain([true]).collect::<Vec<_>>()
             );
         }
+    }
+}
+
+proptest! {
+    #[test]
+    fn make_mut_sliced_matches_vec(
+        values in proptest::collection::vec(any::<bool>(), 0..257),
+        start in 0usize..257,
+        size in 0usize..257,
+        shared in any::<bool>(),
+        cached in any::<bool>(),
+        appended in any::<bool>(),
+    ) {
+        let offset = start % (values.len() + 1);
+        let length = size % (values.len() - offset + 1);
+        let mut expected = values[offset..offset + length].to_vec();
+        let bitmap = Bitmap::from(values).sliced(offset, length);
+        if cached {
+            prop_assert_eq!(bitmap.unset_bits(), expected.iter().filter(|&&v| !v).count());
+        }
+        let parent = shared.then(|| bitmap.clone());
+
+        let mut mutable = bitmap.make_mut();
+        prop_assert!(mutable.iter().eq(expected.iter().copied()));
+        mutable.push(appended);
+        if let Some(parent) = parent {
+            prop_assert!(parent.iter().eq(expected.iter().copied()));
+        }
+        expected.push(appended);
+        prop_assert_eq!(mutable.iter().collect::<Vec<_>>(), expected);
     }
 }
 

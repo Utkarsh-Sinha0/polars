@@ -63,7 +63,18 @@ def test_extend_sliced_12968() -> None:
 
 
 @pytest.mark.parametrize("offset", [0, 1, 8, 61, 64])
-@pytest.mark.parametrize("values", [[False, True, False], [False, None, True]])
+@pytest.mark.parametrize(
+    "values",
+    [
+        [],
+        [False],
+        [None],
+        [False, True, False],
+        [False, None, True],
+        [None] * 65,
+        [False, None, True] * 23,
+    ],
+)
 @pytest.mark.parametrize("extra", [[], [False], [None, True]])
 @pytest.mark.parametrize("shared", [False, True])
 def test_extend_boolean_offset_slice_30105(
